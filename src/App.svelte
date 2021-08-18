@@ -1,30 +1,41 @@
 <script>
-	export let name;
+  let items = [
+    { id: 1, name: "Milk", done: false },
+    { id: 2, name: "Bread", done: true },
+    { id: 3, name: "Eggs", done: false }
+  ];
+
+	const remove = item => {
+    items = items.filter(i => i !== item);
+  };
+
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+  li button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+  }
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  .done span {
+    opacity: 0.4;
+  }
 </style>
+
+<div>
+  <h1>Things to Buy</h1>
+
+  <ul>
+
+
+		{#each items as item}
+			<li class:done={item.done}>
+				<span>{item.name}</span>
+				<button on:click={() => remove(item)}>❌</button>
+			</li>
+		{/each}
+
+  </ul>
+</div>
